@@ -1,6 +1,13 @@
 <html>
     <head>
         <title>Meu primeiro HTML</title>
+        <style>
+            img{width: 300px; border-radius: 50%;}
+            p{color: brown;}
+            h1{color: rgb(177, 13, 13);}
+            ul{background-color: rgb(148, 147, 147); padding: 20px; color: rgb(240, 234, 200);}
+            table, td{border: 1px solid black; border-collapse: collapse;}
+        </style>
     </head>
     <body>
         <!--Comentário-->
@@ -27,5 +34,71 @@
             <li>git config user.name "Nome"</li>
             <li>git config user.email "E-mail"</li>
         </ul>
+        <hr>   
+                
+        <h1>Listas</h1>
+        <p>O html possui listas não ordenadas e listas ordenadas, as listas não ordenadas são definidas com a tag &lt;ul&gt; enquanto usamos &lt;ol&gt; para listas ordenadas</p>
+
+        <ul>
+            <li>Panqueca</li>
+            <li>Bolo</li>
+            <li>Pera</li>
+        </ul>
+
+        <ol start="1" type="I">
+            <li>Panqueca</li>
+            <li>Bolo</li>
+            <li>Pera</li>
+        </ol>
+
+        <dl>
+            <dt>Café</dt>
+            <dd>Bebida fundamental a vida!</dd>
+            <dt>Água</dt>
+            <dd>Segunda bebida fundamental a vida!</dd>
+        </dl>
+
+        <hr>
+
+        <h1>Tags de Formatação de texto</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> <sub>Provident quod nostrum</sub> <sup>sint omnis</sup>, dolore quia magni autem? <strong>Accusamus doloremque voluptates <mark>Texto grifado</mark> amet tempora, minima quae reiciendis mollitia, ratione temporibus error quasi!</strong></p>
+
+        <h1>Links e Imagens</h1>
+        <a target="_blank" href="https://www.google.com"> Google </a>
+        <br>
+        <br>
+        <img src="./imgs/caverna_dragao.jpg" alt="Caverna do Dragão">
+        <img src="./imgs/download.jfif" alt="Sol Telettubies">
+        <br>
+        <br>
+        <img src="https://i.pinimg.com/736x/58/27/67/58276760ec13f352fc8f77a9f2c2da3f.jpg" alt="Demon Slayer" >
+        <br>
+        <br>
+        <h1>Tabelas no HTML</h1>
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Profissão</th>
+            </tr>
+            <tr>
+                <td>Ana</td>
+                <td>23</td>
+                <td>Auxiliar E-commerce</td>
+            </tr>
+            <tr>
+                <td>Gaby</td>
+                <td>23</td>
+                <td>Cozinheira</td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <h1>Formulários</h1>
+        <form target="_blank" action="https://google.com/search">
+            <label for="q">Query de Busca</label>
+            <input id="q" name="q" type="text">
+            <input type="submit" value="Buscar">
+        </form>
     </body>
 </html>
