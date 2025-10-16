@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /*Seletor Universal - Selecionar todas as tags existentes*/
+        *{border: 1px dotted black;}
+        /*Seletor por Elemento*/
+        ul{
+            border: 6px groove green;
+        }
+        li, .Churras#Item2{
+            color: black;}
+        p{
+            color: rgb(228, 146, 23);
+            padding: 10px;
+        }
+        /*Seletor por ID*/
+        #p2, #p4{
+            color: blue;
+            border-top-color: red;
+            border-top-style: solid;
+            border-top-width: 20px;
+            border-top: 5px double blue;
+            border: 10px groove magenta;
+            outline: 5px double greenyellow;
+            outline-offset: 3px;
+        }
+        /*Seletor por Classe - Peso maior*/
+        .Churras{ 
+            background-color: #00FA78; 
+            color:darkmagenta;
+            padding: 10px;
+        }
+            
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <p id="p1">Amábili</p>
+    <p id="p2">Ana</p>
+    <p id="p3">Domenica</p>
+    <p id="p4">Islen</p>
+<!--ul>li{item$}*5-->
+<ul>
+    <li id="Item1" class="Churras"> Alcatra</li>
+    <li id="Item2" class="Churras"> Linguiça</li>
+    <li id="Item3" class="Churras"> Pão de Alho</li>
+    <li id="Item4" class="Churras"> Drink</li>
+    <li id="Item5" class="Churras"> Carvão</li>
+</ul>
+
+</body>
+</html>
