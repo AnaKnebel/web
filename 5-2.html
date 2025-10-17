@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            border: 1px solid black;
+        }
+        img{
+            float: left;
+        }
+        html, body{
+            border-color: crimson;
+        }
+        .box{
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            font-size: 30px;
+            position: static;
+        }
+        #box2{
+            /*Posicionamento relavtivo ao ponto static*/
+            position: relative;
+            top: 30px;
+            left: 30px;
+        }
+        #box3{
+            /*Ele cria um novo fluxo(camada) para o elemento. Ele se posiciona ao primeiro ancestral não static*/
+            position: absolute;
+            top: 50px;
+        }
+        .container{
+            position: relative;
+        }
+        #box4{
+            /*Relacionado ao VP(View Port)*/
+            position: fixed;
+            background-color: aqua;
+            right: 10px;
+            bottom: 10px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Título BLA BLA</h1>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus consequatur, voluptas recusandae eaque fugiat, libero dignissimos qui quisquam nemo nam necessitatibus ratione vero atque iure. Mollitia doloremque repudiandae perspiciatis. Dolore?</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum eum corporis placeat non similique debitis error tempore laborum incidunt, voluptate veniam excepturi nam repudiandae sapiente recusandae maiores expedita porro odio.</p>
+    <span>Lorem </span><img src="./imgs/caverna_dragao.jpg" alt=""><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla obcaecati doloremque omnis error quae neque accusamus nesciunt dolor maxime in iure animi distinctio delectus, libero nemo sapiente fugit, pariatur quaerat.</span>
+
+    <div class="container">
+        <!--div#box$.box{box$}*5-->
+        <div id="box1" class="box">BOX 1</div>
+        <div id="box2" class="box">BOX 2</div>
+        <div id="box3" class="box">BOX 3</div>
+        <div id="box4" class="box">BOX 4</div>
+        <div id="box5" class="box">BOX 5</div>
+        <div id="box6" class="box">BOX 6</div>
+
+    </div>
+    
+</body>
+</html>
