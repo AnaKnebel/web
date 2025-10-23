@@ -18,18 +18,22 @@
             width: 120px;
             height: 120px;
             font-size: 30px;
+            /*Posição em relação ao fluxo do html*/
             position: static;
         }
         #box2{
-            /*Posicionamento relavtivo ao ponto static*/
+            /*Posicionamento relativo ao ponto static*/
             position: relative;
+            background-color: cadetblue;
             top: 30px;
             left: 30px;
         }
         #box3{
             /*Ele cria um novo fluxo(camada) para o elemento. Ele se posiciona ao primeiro ancestral não static*/
             position: absolute;
+            background-color: aquamarine;
             top: 50px;
+            right: 10px;
         }
         .container{
             position: relative;
@@ -41,6 +45,15 @@
             right: 10px;
             bottom: 10px;
         }
+        #box5{
+            /*Fixar no Centro da Página - feito até 2008 para centralizar na Web)*/
+            position: fixed;
+            background-color: chartreuse;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        /*z-index, significa a camada desejada para a propriedade*/
     </style>
     <title>Document</title>
 </head>
