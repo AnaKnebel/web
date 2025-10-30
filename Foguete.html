@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            height: 100vh;
+
+
+        }
+        #rocket{
+            font-size: 100px;
+            animation: subir 5s ease-in-out infinite;
+        }
+
+    @keyframes subir {
+        0% {
+            transform: translateY(100vh);
+        }
+        to{
+            transform: translateY(0VH);
+        }
+        
+    }
+        
+
+    </style>
+</head>
+<body>
+    
+    <div class="box" id="rocket">🚀</div>
+
+</body>
+</html>
