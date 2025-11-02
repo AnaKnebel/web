@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 2 - Explique o que é o protocolo HTTP</title>
+</head>
+<body>
+    <h1>O que significa HTTP?</h1>
+    <p>A sigla HTTP vem de Hypertext Transfer Protocol. Traduzido para o português, HTTP significa “Protocolo de Transferência de Hipertexto”.</p>
+    <p>HTTO é um protocolo de comunicação utilizado para a transferência de informações na <em>World Wide WEB (www)</em> e em outros sistemas de rede.</p>
+    <p>O HTTP é a base para que o cliente e um servidor web troquem informações. Ele permite a requisição e a resposta de recursos, como imagens, arquivos e as próprias páginas webs que acessamos, por meio de mensagens padronizadas. Com ele, é possível que um estudante num café em São Paulo leia um artigo que está armazenado em um servidor no Japão.</p>
+    <h2>Como funciona o HTTP?</h2>
+    <p>O HTTP opera em um modelo cliente-servidor, em que um cliente, geralmente um navegador web, faz solicitações a um servidor para obter recursos, como páginas da web, imagens ou arquivos.</p>
+    <p>O ciclo se inicia quando:</p>
+    <ol type="I">
+        <li>O cliente estabelece contato com o servidor, encaminhando uma requisição HTTP;</li>
+        <li>Nessa solicitação, o cliente especifica o método pretendido (por exemplo, GET para obter informações) e o caminho do recurso desejado;</li>
+        <li>Ao receber essa requisição, o servidor a processa e responde com uma mensagem HTTP, incluindo o recurso requisitado e informações adicionais no cabeçalho da resposta.</li>
+    </ol>
+    <p>E toda essa interação acontece por meio do protocolo TCP (Transmission Control Protocol), que garante uma comunicação confiável e orientada à conexão.</p>
+    <p>Cada requisição do cliente é tratada de forma independente, isto é, as requisições não necessitam de informações sobre requisições anteriores para serem executadas. <span>Sem a necessidade de gerir o estado entre as requisições, o protocolo mantém uma certa simplicidade, promovendo também uma escalabilidade maior.</span></p>
+    <p>Contudo, para abordar a demanda de manter estados em determinadas aplicações web, são comumente empregados mecanismos suplementares, tais como cookies e sessões.</p>
+    <p>Resumindo de forma geral, HTTP é o protocolo que clientes e servidores utilizam para se comunicar e, inclusive, é o protocolo mais utilizado para aplicações e APIs da web.</p>
+    <img src="https://cdn-wcsm.alura.com.br/2025/04/navegador-servidor.jpg" alt="HTTP">
+    <hr>
+    <h2>O processo Request-Response</h2>
+    <p>Uma mensagem de requisição é enviada por um cliente a um servidor para solicitar algum tipo de ação ou recurso.</p>
+    <p>Aqui estão os componentes principais de uma requisição HTTP:</p>
+    <h3>Linha de Solicitação (Request Line):</h3>
+    <p>Na linha de solicitação, presente em uma solicitação HTTP, são especificados três elementos principais: o método HTTP, a URI (Uniform Resource Identifier) e a versão do protocolo HTTP.</p>
+    <p>Exemplo de linha de solicitação:</p>
+    <pre>    GET /exemplo/recurso HTTP/1.1</pre>
+    <p>Neste exemplo, "GET" é o método HTTP, "/exemplo/recurso" é a URI, e "HTTP/1.1" é a versão do protocolo.</p>
+    <p>Uma mensagem inteira de requisição HTTP do servidor poderia se parecer com isto:</p>
+    <pre>    GET / HTTP/1.1 <br>
+    Host: www.meusite.com.br <br>
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3 <br>
+    Accept: */* <br>
+    Accept-Language: en-US,en;q=0.5 <br>
+    Accept-Encoding: gzip, deflate <br>
+    Connection: keep-alive</pre>
+    <p>Os cabeçalhos seguintes (como Host, User-Agent, Accept, etc) fornecem informações adicionais sobre o navegador do cliente e as preferências de conteúdo.</p>
+    <h3>Linha de Status (Status Line):</h3>
+    <p>Na linha de status, presente em uma resposta HTTP, são fornecidos três elementos principais: a versão do protocolo HTTP, um código de status e uma mensagem de status.</p>
+    <p>Exemplo de linha de status:</p>
+    <pre>    HTTP/1.1 200 OK</pre>
+    <p>Neste exemplo, "HTTP/1.1" é a versão do protocolo, "200" é o código de status indicando sucesso, e "OK" é a mensagem de status associada.</p>
+    <p>Uma mensagem inteira de resposta HTTP do servidor poderia se parecer com isto:</p>
+    <pre>    HTTP/1.1 200 OK <br>
+    Date: Sun, 09 Apr 2023 12:28:53 GMT <br>
+    Server: Apache/2.4.18 (Ubuntu) <br>
+    Last-Modified: Sat, 08 Apr 2023 23:11:04 GMT <br>
+    Content-Length: 612 <br>
+    Content-Type: text/html; charset=UTF-8 <br>
+    Connection: closed <br>
+    &lt;html> <br>
+    &lt;head> <br>
+    &lt;title>Exemplo de Site&lt;/title> <br>
+    &lt;/head> <br>
+    &lt;body> <br>
+    &lt;h1>Olá, Mundo!&lt;/h1> <br>
+    &lt;p>Este é um exemplo de corpo de resposta HTTP.&lt;/p> <br>
+    &lt;/body> <br>
+    &lt;/html></pre>
+<p>Os cabeçalhos de resposta, como Date, Server, Last-Modified, fornecem informações sobre o servidor e o recurso enviado, como por exemplo o Content-Type, que informa para o navegador o formato do corpo da resposta (conhecido também como response body) , no nosso aqui do exemplo, um simples documento HTML, e o corpo da resposta que contém o conteúdo solicitado.</p>
+<p>A linha de solicitação informa ao servidor qual ação o cliente deseja realizar, enquanto a linha de status na resposta indica o resultado da solicitação, seja ele um sucesso, um redirecionamento ou um erro específico.</p>
+<p>Essa estrutura padronizada facilita a interoperabilidade entre diferentes sistemas web.</p>
+
+</body>
+</html>
