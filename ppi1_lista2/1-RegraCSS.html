@@ -3,14 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atividade 1 - Regra CSS</title>
+    <title>Regra CSS</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        img{
+           display: block;
+           margin-left: auto;
+           margin-right: auto; 
+        }
+        ul{
+            background-color: rgb(8, 224, 224);
+            border: 5px outset darkcyan;
+        }
+        pre{
+            background-color: rgb(8, 224, 224);
+            border: 5px outset darkcyan;
+        }
+    </style>
 </head>
 <body>
-    
-    <h1>Atividade 1</h1>
-    <h4>O que é uma regra CSS? Explique o conceito de regra CSS e forneça um exemplo prático que inclua um seletor, uma propriedade e um valor.
-</h4>
-    <p></p>
+    <h1>O que é uma regra CSS?</h1>
+    <p>Primeiramente para saber o que é uma regra CSS, vamos entender o que é CSS.</p>
+    <p>CSS <em>(Cascanding Style Sheets)</em> é um comando do HTML que ajuda a definir a aparência de cada elemento HTML da página.</p>
+    <p>Agora sim, o que é uma regra CSS? Para que o CSS funcione corretamente, ele precisa seguir uma regra que é composta por duas partes:</p>
+    <ul>
+        <li><strong>Seletor:</strong> seleciona quais são os elementos em que a regra será aplicada. Podendo usar vários seletores em uma mesma regra, separando eles com uma vírgula;</li>
+        <li><strong>Declaração:</strong> define a aparência do elemento.</li>
+    </ul>
+    <img src="/img/image-7.png" alt="regracss">
+    <h1>Definindo o Estilo (aparência)</h1>
+    <p>Para criar um CSS precisamos utilizar o seguinte elemento: <mark>&lt;style></mark></p>
+    <p>Podemos utilizar ele no &lt;head> (é mais comum) ou no &lt;body> (utilizado para mudar a aparência de algumas partes do código). <Span>Exemplo:</Span></p>
+    <pre><strong> &lt;!DOCTYPE html>
+    &lt;html lang="en">
+    &lt;head>
+        &lt;meta charset="UTF-8">
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
+        &lt;title>Document&lt;/title>
+        &lt;!-- início do CSS -->
+        &lt;style>
+            ul{
+            background-color: rgb(8, 224, 224);
+            border: 5px outset darkcyan;
+        }
+        &lt;/style>
+        &lt;!-- fim do CSS -->
+    &lt;/head>
+    &lt;body>
+        &lt;!-- Conteudo do HTML -->
+    &lt;/body>
+    &lt;/html></strong></pre>
+    <h2>Seletores CSS</h2>
+    <p>O seletor define a que(ais) elemento(s) HTML da página a regra CSS será aplicada. Há diversos tipos de seletores como por <em>tag & id. </em>Regras podem ter mais de 1 seletor, basta separar por vírgula.</p>
 
 </body>
 </html>

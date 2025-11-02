@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incluir CSS em Documentos HTML</title>
+    <style>
+        ol{
+            background-color: lightgray;
+        }
+        h3{
+            color: darkcyan;
+        }
+        pre{
+            background-color: lightgray;
+            border: 2px outset darkolivegreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>Como incluir CSS nos documentos HTML?</h1>
+    <p>Existem 3 formas de incluir CSS nos documentos:</p>
+    <ol>
+        <li>CSS Inline;</li>
+        <li>CSS Interno;</li>
+        <li>CSS Externo.</li>
+    </ol>
+    <hr>
+    <h3>CSS Inline</h3>
+    <p>Este método aplica estilos diretamente a um elemento HTML usando o atributo &lt;style>. É útil para estilos específicos de um único elemento, mas não é recomendado para projetos maiores. <span>Exemplo:</span></p>
+    <pre> &lt;p style="color: blue"> Esse texto ficará azul.&lt;/p></pre>
+    <hr>
+    <h3>CSS Interno</h3>
+    <p>Use a tag &lt;style> para inserir códigos CSS dentro da seção &lt;head> do seu documento HTML. Este método é útil para estilos que se aplicam apenas a uma página específica. <span>Exemplo:</span></p>
+    <pre>    &lt;head> 
+        &lt;style> 
+            h1{
+                color:green;
+            }
+        &lt;/style>
+    &lt;/head>
+    &lt;body> 
+        &lt;h1>Este título é verde.&lt;/h1>
+    &lt;/body>
+    </pre>
+    <hr>
+    <h3>CSS Externo</h3>
+    <p>Este é o método masi comum e recomendado, especialmente para projetos maiores. Ele envolve a criação de um arquivo9 <em>.css</em> separado e a vinculação dele ao seu HTML usando a tag &lt;link> na seção &lt;head>. <span>Exemplo:</span></p>
+    <dl>
+        <dt>No arquivo HTML:</dt>
+        <dd>
+            <pre>
+            &lt;head> 
+                &lt;link rel="stylesheet" href"style.css">
+            &lt;/head>
+            </pre>
+        </dd>
+        <dt>No arquivo CSS <em>(style.css)</em>:</dt>
+        <dd>
+            <pre>
+            h1{
+                color: red;
+            }
+            </pre>
+        </dd>
+    </dl>
+</body>
+</html>

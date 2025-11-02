@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>   
+   <title>Exemplo especificidade de seletores</title>
+   <style>
+      /*regra 1*/ li{color:red;}
+      /*regra 2*/ .churras{color:green;}
+      /*regra 3*/ .fruta{color:gray}
+      /*regra 4*/ li+li.churras{color: black;}
+      /*regra 5*/ .churras[draggable="true"]{color: magenta;}
+      /*regra 6*/ #lip1,#lip2,#lip3{color:blue}
+      /*regra 7*/ #lip3.fruta{color:orange}
+      /*regra 8*/ ol>li.churras#lip5{color:purple}
+   </style>
+</head>
+<body>   
+   <ol>
+   <!--item 1--> <li id="lip0">Abacaxi</li>
+   <!--item 2--> <li           class="fruta">Melão</li>
+   <!--item 3--> <li id="lip2" class="fruta">Pera</li>
+   <!--item 4--> <li id="lip3" class="fruta">Uva</li>
+   <!--item 5--> <li id="lip4" class="fruta">Maçã</li>
+   <!--item 6--> <li           class="churras">Carne</li>
+   <!--item 7--> <li           class="churras">Linguiça</li>
+   <!--item 8--> <li id="lip7" class="churras" draggable="true">Pão de alho</li>
+   </ol> 
+   <hr> 
+   <pre>
+    /*regra 1*/ li{color:red;} 
+    <p><strong>Utilizado para definir a cor do elemento <em>"li"</em> para vermelho (referente à lista).</strong></p>
+    
+    /*regra 2*/ .churras{color:green;} 
+    <p><strong>Utilizado para definir a cor dos elementos que estão na classe <em>"churras"</em> para verde</strong></p>
+   
+    /*regra 3*/ .fruta{color:gray} 
+    <p><strong>Utilizado para definir a cor dos elementos que estão na classe <em>"fruta"</em> para cinza</strong></p>
+   
+    /*regra 4*/ li+li.churras{color: black;} <p><strong>Utilizado para definir a cor dos elementos que estão no elemento <em>"li"</em> e que também estão na classe <em>"churras"</em> para preto</strong></p>
+   
+    /*regra 5*/ .churras[draggable="true"]{color: magenta;} <p><strong>Utilizado para definir a cor dos elementos que estão na classe <em>"churras"</em> para a cor magenta, mas que o elemento esteja com o draggable (permitir o elemento ser arrastado) esteja <em>"true"</em></strong></p>
+  
+    /*regra 6*/ #lip1,#lip2,#lip3{color:blue} <p><strong>Utilizado para definir a cor dos elementos que estão com o <em>"id"</em> mencionados para a cor azul</strong></p>
+   
+    /*regra 7*/ #lip3.fruta{color:orange} <p><strong>Utilizado para definir a cor do elemento com o <em>"id"</em> mencionado e que faz parte da classe <em>"fruta"</em> mudando para laranja</strong></p>
+  
+    /*regra 8*/ ol>li.churras#lip5{color:purple} <p><strong>Utilizado para definir a cor dos elementos que estão dentro do elemento de lista ordenada <em>"&lt;ol>"</em> e que fazem parte do elemento da lista (li), que possue a classe como "churras" e tem o id como "#lip5", para a cor roxa.</strong></p>
+   </pre>
+</body>
+</html>
