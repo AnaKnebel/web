@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS</title>
+    <style>
+        ul{
+            background-color: rgb(8, 224, 224);
+            border: 5px outset darkcyan;
+        }
+        .container{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <h1>O que é uma regra CSS?</h1>
+    <p>CSS é um comando do HTML que nos ajuda a definir a aparência de cada elemento HTML usado na página. E para que ele funcione, ele precisa seguir uma regra onde é composta po duas partes:</p>
+    <ul>
+        <li><strong>Seletor:</strong> Seleciona qual(is) elemento(s) que serão utilizados para aplicar a regra. Pode ser usado mais de um seletor na mesma regra, basta estar separando eles por uma vírgula;</li>
+        <li><strong>Declaração:</strong> Onde será definido a aparência do elemento.</li>
+    </ul>
+    <p>Para criar um CSS precisamos utilizar o seguinte elemento: <mark>&lt;style></mark></p>
+    <p>Podemos utilizar ele no &lt;head> (é mais comum) ou no &lt;body> (utilizado para mudar a aparência de algumas partes do código). <Span>Exemplo utilizando no &lt;head>:</Span></p>
+    <pre><strong> &lt;!DOCTYPE html>
+    &lt;html lang="en">
+    &lt;head>
+        &lt;meta charset="UTF-8">
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
+        &lt;title>Document&lt;/title>
+        &lt;!-- início do CSS -->
+        &lt;style>
+            ul{ <--- Seletor
+            background-color: rgb(8, 224, 224); <--- Declaração
+            border: 5px outset darkcyan; <--- Declaração
+        }
+        &lt;/style>
+        &lt;!-- fim do CSS -->
+    &lt;/head>
+    &lt;body>
+        &lt;!-- Conteudo do HTML -->
+        &lt;ul>
+            &lt;li> Criação da Lista &lt;/li>
+        &lt;/ul>
+    &lt;/body>
+    &lt;/html></strong></pre>
+    <p>O exemplo mostrado acima, irá deixar a lista com um fundo colorido e com uma borda (Conforme está a tabela acima sobre a regra).</p>
+    <hr>
+    <h1>Animação em HTML</h1>
+    <div class="container">
+        <div id="box1" class="box">1</div>
+        <div id="box2" class="box">2</div>
+        <div id="box3" class="box">3</div>
+        <div id="box4" class="box">4</div>
+    </div>
+</body>
+</html>
