@@ -25,10 +25,27 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+        #alemanha{
+            display: flex;
+            flex-direction: column;
+        }
+        .preto{
+            background-color: black
+        }
+        .amarelo{
+            background-color: yellow;
+        }
+        #holanda{
+            display: flex;
+            flex-direction: column;
+        }
+        .azul{
+            background-color: rgb(6, 57, 122);
+        }
         #italia{
             display: flex;
         }
-        .verde, .branco, .vermelho{
+        .verde, .branco, .vermelho,  .amarelo, .preto, .azul{
             flex: 1;
             height: 100%;
         }
@@ -41,6 +58,46 @@
         .vermelho{
             background-color: red;
         }
+        #brasil{
+            position: relative;
+            background-color: #009440;
+            overflow: hidden;
+        }
+        .losango{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-color: #ffcb00;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            z-index: 1;
+        }
+        .circazul{
+            background-color: #302681;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            overflow: hidden;
+        }
+        .faixa-texto{
+            width: 230px;
+            height: 18px;
+            background-color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(20deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
     </style>
 </head>
@@ -49,10 +106,14 @@
             <div class="cir"></div>
         </div>
         <div class="bandeira" id="alemanha">
-
+            <div class="preto"></div>
+            <div class="vermelho"></div>
+            <div class="amarelo"></div>
         </div>
         <div class="bandeira" id="holanda">
-
+            <div class="vermelho"></div>
+            <div class="branco"></div>
+            <div class="azul"></div>
         </div>
         <div class="bandeira" id="italia">
             <div class="verde"></div>
@@ -60,7 +121,11 @@
             <div class="vermelho"></div>
         </div>
         <div class="bandeira" id="brasil">
-
+            <div class="circazul">
+            <div class="faixa-texto"></div>
+            </div>
+            <div class="losango">
+            </div>            
         </div>
 </body>
 </html>
