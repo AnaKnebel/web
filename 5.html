@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout</title>
+    <style>
+        .container{
+        display: grid;
+        height: 100vh;
+        width: 100vw;
+        color: white;
+        font-size: 3rem;
+        text-align: center;
+
+    }
+    @media screen and (max-width: 600px) {
+    .container{
+        grid-template-areas:
+        "box1"
+        "box2"
+        "box3"
+        "box4"
+        "box5"
+        "box6"
+        "box7"
+        "box8"
+        "box9"
+        "box10"
+    }
+}
+    @media screen and (min-width: 601px) and (max-width: 800px) {
+    .container{
+        grid-template-areas:
+        "box1 box1 box4 box4 box5 box5"
+        "box1 box1 box4 box4 box6 box7"
+        "box2 box2 box4 box4 box6 box8"
+        "box2 box2 box4 box4 box6 box9"
+        "box3 box3 box3 box3 box6 box10"
+    }
+}
+    .box1{
+        grid-area: box1;
+        background-color: orange;
+        border: 3px solid white;
+    }
+    .box2{
+        grid-area: box2;
+        background-color: rgb(150, 216, 236);
+        border: 3px solid white;
+    }
+    .box3{
+        grid-area: box3;
+        background-color: rgb(214, 141, 6);
+        border: 3px solid white;
+    }
+    .box4{
+        grid-area: box4;
+        background-color: rgb(228, 154, 146);
+        border: 3px solid white;
+    }
+    .box5{
+        grid-area: box5;
+        background-color: rgb(168, 242, 245);
+        border: 3px solid white;
+    }
+    .box6{
+        grid-area: box6;
+        background-color: rgb(23, 122, 9);
+        border: 3px solid white;
+    }
+    .box7{
+        grid-area: box7;
+        background-color: orange;
+        border-radius: 50%;
+        border: 3px solid white;
+    }
+    .box8{
+        grid-area: box8;
+        background-color: rgb(228, 154, 146);
+        border-radius: 50%;
+        border: 3px solid white;
+    }
+    .box9{
+        grid-area: box9;
+        background-color: rgb(21, 124, 7);
+        border-radius: 50%;
+        border: 3px solid white;
+    }
+    .box10{
+        grid-area: box10;
+        background-color: rgb(208, 170, 226);
+        border-radius: 50%;
+        border: 3px solid white;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box1">1</div>
+        <div class="box2">2</div>
+        <div class="box3">3</div>
+        <div class="box4">4</div>
+        <div class="box5">5</div>
+        <div class="box6">6</div>
+        <div class="box7">7</div>
+        <div class="box8">8</div>
+        <div class="box9">9</div>
+        <div class="box10">10</div>
+    </div>
+</body>
+</html>
