@@ -16,9 +16,10 @@
     </style>
 </head>
 <body>
+    
     <div id="formulario">
         <label for="id">ID</label>
-        <input type="text" name="id" id="id">
+        <input type="text" name="id" id="id" readonly>
         <br>
         
         <label for="nome">Nome</label>
@@ -30,7 +31,9 @@
         <br>
 
         <button id="botaoSalvar">Cadastrar</button>
+        <button id="limpar">Limpar Lista</button>
     </div>
+        
     <br>
     <div id="listagem">
         
@@ -43,18 +46,30 @@
         let listagem=document.querySelector("#listagem");
 
         let button=document.querySelector("#botaoSalvar");
-        var listaNomes=[];
+        let buttonlimpar=document.querySelector("#limpar");
+        buttonlimpar.addEventListener("click", ()=>{
+            localStorage.clear();
+            listagem.innerHTML="";
+        })
+        
+        if(localStorage.getItem("listaNomes")){
+            listaNomes= JSON.parse(localStorage.getItem("listaNomes"));
+        } else {
+            listaNomes=[];
+        }
+
         button.addEventListener("click", ()=>{
+            let maxid=listaNomes.length;
             listaNomes.push({
-                "id":inputid.value,
+                "id":maxid+1,
                 "nome":inputnome.value,
                 "email":inputemail.value
             });
             //listaNomes.push(Number.parseInt(inputid.value), inputnome.value, inputemail.value);
             console.log(listaNomes);
-            listagemPessoas()
+            listagemPessoas();
+            localStorage.setItem("listaNomes", JSON.stringify(listaNomes))
         })
-
         function listagemPessoas(){
             listagem.innerHTML="";
             listaNomes.forEach((e)=>{
@@ -62,12 +77,12 @@
                 <input type="text" class="id" value=${e.id}>
                 <input type="text" class="nome" value=${e.nome}>
                 <input type="text" class="email" value=${e.email}>
+                <button>Editar</button>
+                <button>Excluir</button>
                 </div>`;
                 listagem.innerHTML+=item;
             })
-            
         }
-
         listagemPessoas()
     </script>
 </body>

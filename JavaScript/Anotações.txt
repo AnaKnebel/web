@@ -39,3 +39,7 @@ Exemplo:
 
 Nome="Ana" --> "string"
 Nome=1 --> muda para "Number"
+
+-----------------------------------------------------------------------------------------------
+
+localStorage.setItem("nome","Ana")
