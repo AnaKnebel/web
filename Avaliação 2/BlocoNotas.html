@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloco de Notas</title>
+    <style>
+        h1{
+            text-align: center;
+            font-family: cursive;
+            color: darkred;
+        }
+        div{
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+        .box{
+            display: grid;
+            width: 44vw;
+            height: 44vh;
+            background-color: khaki;
+            border: 2px groove rgb(204, 144, 14)
+        }
+        #titulo{
+            height: 15px;
+            background-color: rgb(250, 242, 167);
+        }
+        #mensagem{
+            background-color: rgb(250, 242, 167);
+            width: 34vw;
+            height: 34vh;
+        }
+        label{
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: oblique;
+        }
+        button{
+            position: relative;;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bloco de Notas</h1>
+
+    <div>
+        <div class="box">
+            <label for="nome"><b>Título</b></label>
+            <input type="text" name="nome" id="titulo">
+            <br>
+            <label for="email"><b>Mensagem</b></label>
+            <input type="text" name="email" id="mensagem">
+        </div>
+    </div>
+    <button>Cadastrar</button>
+
+    <script>
+
+    </script>
+</body>
+</html>
