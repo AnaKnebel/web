@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bloco de Notas</title>
     <style>
+        /* Centralizar o conteúdo principal*/
         body{
             background-color: #f0f0f0; 
             margin: 0;
@@ -13,17 +14,20 @@
             flex-direction: column;
             align-items: center;
         }
+        /* Personalizar os Títulos*/
         h1, h2{
             text-align: center;
             font-family: 'Courier New', Courier, monospace;
             color: #333;
             margin-bottom: 30px;
         }
+        /* Centralizar os blocos*/
         .container{
             display: flex;
             justify-content: center;
             width: 100%;
         }
+        /* Estilo do Bloco de notas*/
         .box{
             width: 500px;
             height: 600px;
@@ -33,6 +37,7 @@
             display: flex; 
             flex-direction: column;
         }
+        /* Design do campo para escrever a mensagem*/
         #mensagem{
             flex-grow: 1;
             min-height: 200px;
@@ -45,6 +50,7 @@
             padding: 5px;
             outline: none;
         }
+        /* Design para o campo dos título*/
         #titulo{
             background-color: #fff9bf;
             border: none;
@@ -57,6 +63,7 @@
             font-family: 'Courier New', Courier, monospace;
             outline: none;
         }
+        /* Design do botão*/
         button {
             background-color: #666;
             color: white;
@@ -67,14 +74,17 @@
             margin-top: 20px;
             font-family: 'Courier New', Courier, monospace;
         }
+        /* Mudança da cor do botão ao passar o mouse*/
         button:hover {
             background-color: #444;
         }
+        /* Design referente ao texto que aparece de fundo nas caixas de texto*/
         ::placeholder{
             color: #999;
             font-style: italic;
             font-family: 'Courier New', Courier, monospace;
         }
+        /* Estilo para o local que irá aparecer as notas salvas*/
         #lista-notas {
         width: 540px;
         margin-top: 40px;
@@ -85,7 +95,7 @@
             border-bottom: 1px dashed #ccc;
             padding-bottom: 10px;
         }
-
+        /* Design do bloco da nota salva*/
         .nota-item {
             display: flex;
             justify-content: space-between;
@@ -97,44 +107,45 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
             transition: background-color 0.2s;
         }
-
+        /* mudança de cor no bloco da nota salva*/
         .nota-item:hover {
             background-color: #f7f7f7;
         }
-
+        
         .nota-header {
             flex-grow: 1;
             text-align: left;
             cursor: pointer;
         }
-
+        /* Estilo do título da nota salva*/
         .nota-header h3 {
             margin: 0;
             font-size: 16px;
             color: #333;
             font-family: 'Courier New', Courier, monospace;
         }
-
+        /* Estilo da data*/
         .nota-item span {
             font-size: 12px;
             color: #888;
             margin-right: 15px;
             font-family: Arial, sans-serif;
         }
-
+        /* Estilo dos botões de exclusão e edição*/
         .nota-acoes button {
             margin-left: 10px;
             padding: 5px 10px;
             font-size: 12px;
             margin-top: 0; 
         }
-
+        /* cores dos botões de Edição e Exclusão*/
         .btn-editar { 
             background-color: #007bff;
         }
         .btn-excluir { 
             background-color: #dc3545;
         }
+        /* Cores alternadas quando passado o mouse emcima*/
         .btn-editar:hover { background-color: #0056b3; }
         .btn-excluir:hover { background-color: #c82333; }
     </style>
@@ -155,128 +166,133 @@
     
 
     <script>
-        const tituloInput = document.getElementById('titulo');
-const mensText = document.getElementById('mensagem');
-const botaoSa = document.getElementById('botaoSalvar');
-const listaNotas = document.getElementById('lista-notas');
-let notaEditId = null;
-
-botaoSa.addEventListener('click', () => {
+    /* Declarar Variaves*/
+    const tituloInput = document.getElementById('titulo');
+    const mensText = document.getElementById('mensagem');
+    const botaoSa = document.getElementById('botaoSalvar');
+    const listaNotas = document.getElementById('lista-notas');
+    /* Variável para armazenar o ID da nota que está em edição.*/
+    let notaEditId = null;
+    /* Ação do botão de salvar nota*/
+    botaoSa.addEventListener('click', () => {
     const titulo = tituloInput.value.trim();
     const mensagem = mensText.value.trim();
-
+        /*Alerta caso não seja preenchido os campos*/
     if (titulo === '' || mensagem === '') {
         alert('Por favor, preencha o título e a mensagem.');
         return;
     }
     let notas = JSON.parse(localStorage.getItem('notas')) || [];
-
+    /* Verifica se estamos em modo de EDIÇÃO (se notaEditId tem um valor)*/
     if (notaEditId != null) {
+        /* Encontra a posição da nota no array que corresponde ao ID em edição.*/
         const index = notas.findIndex(nota => nota.id === notaEditId);
         if (index !== -1) {
+            /* Atualiza o conteúdo da nota existente com os novos valores dos campos*/
             notas[index].titulo = titulo;
             notas[index].mensagem = mensagem;
         }
         notaEditId = null;
         botaoSa.textContent = 'Salvar Nota';
-    } else {
+    } else { /*Se notaEditId for null, estamos em modo de CRIAÇÃO*/
+        /*Será salvo a data atual do PC*/
         const novaNota = {
             id: Date.now(),
             titulo: titulo,
             mensagem: mensagem,
             data: new Date().toLocaleDateString('pt-BR')
         };
-        notas.push(novaNota);
+        notas.push(novaNota); /* Adiciona a nova nota ao array*/
     }
     localStorage.setItem('notas', JSON.stringify(notas));
-
+    /*Limpa os campos após o salvamento*/
     limparCampos();
     listarNotas();
-});
-
-function listarNotas() {
-    const notas = JSON.parse(localStorage.getItem('notas')) || [];
-    listaNotas.innerHTML = '<h2>Minhas Anotações</h2>';
-
-    if (notas.length === 0) {
-        listaNotas.innerHTML += '<p style="font-family: Arial, sans-serif;">Nenhuma nota salva ainda.</p>';
-        return;
-    }
-
-    notas.forEach(nota => {
-        const notaElemento = document.createElement('div');
-        notaElemento.classList.add('nota-item');
-        notaElemento.innerHTML = `
-            <div class="nota-header">
-                <h3>${nota.titulo}</h3>
-            </div>
-            <span>${nota.data}</span>
-            <div class="nota-acoes">
-                <button class="btn-editar" data-id="${nota.id}">Editar</button>
-                <button class="btn-excluir" data-id="${nota.id}">Excluir</button>
-            </div>
-        `;
-        
-        notaElemento.querySelector('.nota-header').addEventListener('click', () => abrirNotaParaVisualizar(nota.id));
-        notaElemento.querySelector('.btn-editar').addEventListener('click', (e) => abrirNotaParaEdicao(Number(e.target.dataset.id)));
-        notaElemento.querySelector('.btn-excluir').addEventListener('click', (e) => excluirNota(Number(e.target.dataset.id)));
-
-        listaNotas.appendChild(notaElemento);
     });
-}
+    /*Função que irá mostrar a lista das notas salvas*/
+    function listarNotas() {
+        const notas = JSON.parse(localStorage.getItem('notas')) || [];
+        listaNotas.innerHTML = '<h2>Minhas Anotações</h2>';
 
-function abrirNotaParaVisualizar(id) {
-    const notas = JSON.parse(localStorage.getItem('notas')) || [];
-    const nota = notas.find(n => n.id === id);
-
-    if (nota) {
-        tituloInput.value = nota.titulo;
-        mensText.value = nota.mensagem;
-        
-        notaEditId = null;
-        botaoSa.textContent = 'Salvar Nota'; 
-        
-        tituloInput.focus();
-    }
-}
-
-function abrirNotaParaEdicao(id) {
-    const notas = JSON.parse(localStorage.getItem('notas')) || [];
-    const nota = notas.find(n => n.id === id);
-
-    if (nota) {
-        tituloInput.value = nota.titulo;
-        mensText.value = nota.mensagem;
-        
-        notaEditId = id; 
-        botaoSa.textContent = 'Atualizar Nota'; 
-    }
-}
-
-function excluirNota(id) {
-    if (confirm('Tem certeza que deseja excluir esta nota?')) {
-        let notas = JSON.parse(localStorage.getItem('notas')) || [];
-        
-        notas = notas.filter(nota => nota.id !== id);
-
-        localStorage.setItem('notas', JSON.stringify(notas));
-
-        if (notaEditId === id) { 
-            limparCampos();
+        if (notas.length === 0) {
+            listaNotas.innerHTML += '<p style="font-family: Arial, sans-serif;">Nenhuma nota salva ainda.</p>';
+            return;
         }
 
-        listarNotas(); 
+        notas.forEach(nota => { /*Criada uma div para cada nota salva*/
+            const notaElemento = document.createElement('div');
+            notaElemento.classList.add('nota-item');
+            notaElemento.innerHTML = `
+                <div class="nota-header">
+                    <h3>${nota.titulo}</h3>
+                </div>
+                <span>${nota.data}</span>
+                <div class="nota-acoes">
+                    <button class="btn-editar" data-id="${nota.id}">Editar</button>
+                    <button class="btn-excluir" data-id="${nota.id}">Excluir</button>
+                </div>
+            `;
+            notaElemento.querySelector('.nota-header').addEventListener('click', () => abrirNotaParaVisualizar(nota.id)); /*Abrir a nota ao clicar nela*/
+            notaElemento.querySelector('.btn-editar').addEventListener('click', (e) => abrirNotaParaEdicao(Number(e.target.dataset.id))); /* Chamar a edição da nota*/
+            notaElemento.querySelector('.btn-excluir').addEventListener('click', (e) => excluirNota(Number(e.target.dataset.id))); /*Chama a função de exclusão da nota*/
+
+            listaNotas.appendChild(notaElemento); /* Insere o item na lista na tela*/
+        });
     }
-}
+    /* Criação da função para poder visualizar a nota ao clicar nela*/
+    function abrirNotaParaVisualizar(id) {
+        const notas = JSON.parse(localStorage.getItem('notas')) || [];
+        /* Usa o método .find para buscar a nota correspondente ao ID clicado*/
+        const nota = notas.find(n => n.id === id);
 
-function limparCampos() {
-    tituloInput.value = '';
-    mensText.value = '';
-    notaEditId = null;
-    botaoSa.textContent = 'Salvar Nota';
-}
+        if (nota) {
+            tituloInput.value = nota.titulo;
+            mensText.value = nota.mensagem;
 
-listarNotas();
+            notaEditId = null;
+            botaoSa.textContent = 'Salvar Nota'; 
+
+            tituloInput.focus();
+        }
+    }
+    /* Fazer Edição da nota já salva e mudar o texto do botão*/
+    function abrirNotaParaEdicao(id) {
+        const notas = JSON.parse(localStorage.getItem('notas')) || [];
+        const nota = notas.find(n => n.id === id); /* Busca a nota a ser editada pelo ID*/
+
+        if (nota) {
+            tituloInput.value = nota.titulo;
+            mensText.value = nota.mensagem;
+
+            notaEditId = id; 
+            botaoSa.textContent = 'Atualizar Nota'; 
+        }
+    }
+    /*Caso confirme a exclusão da nota, para seguir excluindo ela*/
+    function excluirNota(id) {
+        if (confirm('Tem certeza que deseja excluir esta nota?')) {
+            let notas = JSON.parse(localStorage.getItem('notas')) || [];
+            /* Filtra o array, mantendo SOMENTE as notas cujo ID é diferente do ID a ser excluído*/
+            notas = notas.filter(nota => nota.id !== id);
+
+            localStorage.setItem('notas', JSON.stringify(notas));
+
+            if (notaEditId === id) { 
+                limparCampos();
+            }
+
+            listarNotas(); 
+        }
+    }
+    /*Limpar os campos Após salvar*/
+    function limparCampos() {
+        tituloInput.value = '';
+        mensText.value = '';
+        notaEditId = null;
+        botaoSa.textContent = 'Salvar Nota';
+    }
+
+    listarNotas();
     </script>
 </body>
 </html>
