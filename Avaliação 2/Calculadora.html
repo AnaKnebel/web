@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Básica</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 50px;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .calculator {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 10px;
+            width: 300px;
+        }
+        #display {
+            width: 95%; 
+            height: 50px;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            font-size: 2em;
+            text-align: right;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            background-color: #eee;
+            box-sizing: border-box;
+        }
+        .container {
+            display: grid;
+            gap: 5px; 
+            grid-template-areas:
+                "adicao divisao multiplicacao subtrair"
+                "n7 n8 n9 igual"
+                "n4 n5 n6 igual"
+                "n1 n2 n3 igual"
+                "n0 ponto C igual"; 
+            
+            grid-template-columns: repeat(4, 1fr); 
+        }
+        .num, .operator, .control {
+            background-color: lightgray;
+            padding: 20px;
+            font-size: 1.5em;
+            text-align: center;
+            border: 1px solid gray;
+            border-radius: 4px;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.1s;
+        }
+        #C{
+            grid-area: C; 
+            background-color: #d4d4d2; 
+        }
+        #divisao{ 
+            grid-area: divisao; 
+            background-color: #ff9500; 
+            color: white; 
+        }
+        #multiplicacao{ 
+            grid-area: multiplicacao; 
+            background-color: #ff9500; 
+            color: white; 
+        }
+        #subtrair{
+            grid-area: subtrair;
+            background-color: #ff9500; 
+            color: white; }
+        #adicao{ 
+            grid-area: adicao; 
+            background-color: #ff9500; 
+            color: white; 
+        }
+        #igual{ 
+            grid-area: igual; 
+            background-color: #007aff; 
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #n7{grid-area: n7;}
+        #n8{grid-area: n8;}
+        #n9{grid-area: n9;}
+        #n4{grid-area: n4;}
+        #n5{grid-area: n5;}
+        #n6{grid-area: n6;}
+        #n1{grid-area: n1;}
+        #n2{grid-area: n2;}
+        #n3{grid-area: n3;}
+        #n0{grid-area: n0;} 
+        #ponto{ grid-area: ponto;}
+        .num:hover, .control:hover { background-color: #ccc; }
+        .operator:hover { background-color: #e08500; }
+        #igual:hover { background-color: #0068e0; }
+        #C:hover { background-color: #b0b0af; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled value="0"> 
+
+        <div class="container">
+            <div id="adicao" class="operator" onclick="appendToDisplay('+')">+</div>
+            <div id="divisao" class="operator" onclick="appendToDisplay('/')">/</div>
+            <div id="multiplicacao" class="operator" onclick="appendToDisplay('*')">*</div>
+            <div id="subtrair" class="operator" onclick="appendToDisplay('-')">-</div>
+            
+            <div id="n0" class="num" onclick="appendToDisplay('0')">0</div>
+            <div id="n1" class="num" onclick="appendToDisplay('1')">1</div>
+            <div id="n2" class="num" onclick="appendToDisplay('2')">2</div>
+            <div id="n3" class="num" onclick="appendToDisplay('3')">3</div>
+            <div id="n4" class="num" onclick="appendToDisplay('4')">4</div>
+            <div id="n5" class="num" onclick="appendToDisplay('5')">5</div>
+            <div id="n6" class="num" onclick="appendToDisplay('6')">6</div>
+            <div id="n7" class="num" onclick="appendToDisplay('7')">7</div>
+            <div id="n8" class="num" onclick="appendToDisplay('8')">8</div>
+            <div id="n9" class="num" onclick="appendToDisplay('9')">9</div>
+            
+            <div id="ponto" class="num" onclick="appendToDisplay('.')">.</div>
+            <div id="C" class="control" onclick="clearDisplay()">C</div>
+            
+            <div id="igual" class="operator" onclick="calculateResult()">=</div>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+        /*Código para fazer os botões funcionarem*/
+        function appendToDisplay(value) {
+            /*Irá saber se deve subtituir o 0 ou colocar a operação escolhida ao lado do 0*/
+            if (display.value === '0' || display.value === 'Erro' || display.value.startsWith('Erro')) { 
+                /*Se o primeiro botao escolhido por um operador, ele anexa o operados ao lado do 0*/
+                if (['+', '-', '*', '/'].includes(value) && display.value === '0') { 
+                     display.value += value;
+                 /*Se o primeiro botao selecionado for um número ele irá substituir o 0 ou dar Erro*/
+                } else if (!['+', '-', '*', '/'].includes(value)) {
+                    display.value = value;
+                }
+                /* Se já estiver mostrando algum número ou expressão, irá adicionar o novo valor ao lado*/
+            } else {
+                display.value += value;
+            }
+        }
+        /*Fazer funcionar o botão "C" para limpar o display*/
+        function clearDisplay() {
+            display.value = '0';
+        }
+        /*Fazer funcionar o calculo*/
+        function calculateResult() {
+            let expression = display.value;
+            /* Conferir se a entrada é válida, e garantir que a entrada seja apenas caracteres permitidos*/
+            const safeRegex = /^([0-9+\-*/.]| )+$/;
+            /*Caso escolher valores inválidos, irá aparecer uma mensagem*/
+            if (!safeRegex.test(expression)) {
+                display.value = 'Erro: Entrada Inválida';
+                return;
+            }
+            try {
+                /* Usa a função eval() para calcular o resultado da string (expressão)*/
+                let result = eval(expression);
+                /* Verifica se o resultado é infinito (tratando a divisão por zero)*/
+                if (!isFinite(result)) {
+                    display.value = 'Erro: Divisão por zero';
+                } else {
+                    /* Arredonda o resultado com até 8 casas decimais, se for um número decimal.*/
+                    display.value = result.toString().includes('.') ? parseFloat(result.toFixed(8)) : result;
+                }
+            } catch (e) {
+                /* Captura erros de sintaxe (ex: operação incompleta, como '5+')*/
+                display.value = 'Erro de Sintaxe';
+            }
+        }
+    </script>
+</body>
+</html>
