@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca Filmes com Sinopse</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #1a1a2e; 
+            color: #fff;
+        }
+        #header {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+        }
+        #header h2 {
+            margin-bottom: 15px;
+            font-size: 2em;
+        }
+        #titulo {
+            padding: 10px;
+            width: 300px;
+            border: 2px solid #5a5a7a;
+            border-radius: 5px;
+            background-color: #2e2e4a;
+            color: #fff;
+            margin-right: 10px;
+        }
+        #buscar {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff5a5f;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        #buscar:hover {
+            background-color: #e04a4f;
+        }
+        #filmes {
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 25px;
+            justify-content: center; 
+        }
+        .filme {
+            background-color: #2a2a4a;
+            border-radius: 10px;
+            width: 280px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            padding-bottom: 15px;
+        }
+
+        .imgPoster {
+            width: 100%;
+            height: 380px;
+            object-fit: cover; 
+            margin-bottom: 10px;
+            border-bottom: 3px solid #ff5a5f;
+        }
+
+        .info {
+            padding: 0 15px;
+            text-align: left;
+        }
+
+        .filmeTitulo {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 5px 0 8px 0;
+            color: #ffcc00;
+        }
+
+        .filmeAno, .filmeTipo {
+            font-size: 0.9em;
+            color: #aaa;
+            margin: 2px 0;
+        }
+        
+        .filmeDescricao {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #ccc;
+            line-height: 1.4;
+            height: 70px; 
+            overflow: hidden;
+        }
+        .alerta {
+            color: #ff5a5f;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h2>Busca de Filmes e Séries 🎬</h2>
+        <label for="titulo">Título do Filme:</label>
+        <input type="text" id="titulo" name="titulo" placeholder="Ex: Fast and the Furious">
+        <button id="buscar">Buscar</button>
+    </div>
+    
+    <div id="filmes"></div>
+    
+    <script>
+        let inputfilmes = document.querySelector("#titulo");
+        let divresultado = document.querySelector("#filmes");
+        let buscar = document.querySelector("#buscar");
+        /*Função para o sdcript buscar detalhes do filme na API*/
+        function buscarDetalhesDoFilme(imdbID) {
+            const urlDetalhes = "https://www.omdbapi.com/?i="+imdbID+"&apikey=f77bfada";
+            return fetch(urlDetalhes).then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro de rede ao buscar detalhes: ${response.status}`);
+                }
+                return response.json();
+            });
+        }
+        /* Função para a exibição dos filmes localizados, com sinopse, poster, tipo e ano*/
+        function exibirFilme(filmeDetalhado) {
+            /*Verifica se o poster é 'N/A' ou inexistente e usa um placeholder se for o caso.*/
+            const posterSrc = (filmeDetalhado.Poster === "N/A" || !filmeDetalhado.Poster) 
+                ? "https://via.placeholder.com/280x380?text=Poster+Não+Disponível" 
+                : filmeDetalhado.Poster;
+            /*Puxar a sinopse dos filmes*/
+            const sinopse = (filmeDetalhado.Plot === "N/A" || !filmeDetalhado.Plot) 
+                ? "Sinopse não disponível." 
+                : filmeDetalhado.Plot;
+            /*Criar a vitrine dos filmes*/
+            let divfilme = `
+                <div class="filme">
+                    <img src="${posterSrc}" alt="Poster de ${filmeDetalhado.Title}" class="imgPoster">
+                    <div class="info">
+                        <p class="filmeTitulo">${filmeDetalhado.Title}</p>
+                        <p class="filmeTipo">Tipo: ${filmeDetalhado.Type.charAt(0).toUpperCase() + filmeDetalhado.Type.slice(1)}</p>
+                        <p class="filmeAno">Ano: ${filmeDetalhado.Year}</p>
+                        <p class="filmeDescricao">${sinopse}</p>
+                    </div>
+                </div>
+            `;
+            divresultado.innerHTML += divfilme;
+        }
+        /*Função para buscar o filme*/
+        function buscarFilmes(titulo) {
+            divresultado.innerHTML = '';
+            fetch("https://www.omdbapi.com/?s="+encodeURIComponent(titulo)+"&apikey=f77bfada")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Erro de rede na busca: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((dataBusca) => {
+                if (dataBusca.Response === "True" && dataBusca.Search) {
+                    
+                    // Mapeia a lista de filmes resumidos para uma lista de promessas de detalhes
+                    const promessasDetalhes = dataBusca.Search.map(filmeResumido => {
+                        return buscarDetalhesDoFilme(filmeResumido.imdbID);
+                    });
+                    
+                    // Espera que TODAS as promessas de detalhes sejam resolvidas
+                    return Promise.all(promessasDetalhes);
+
+                } else if (dataBusca.Response === "False") {
+                    divresultado.innerHTML = `<p class='alerta'>Nenhum resultado encontrado para "${titulo}". Tente novamente.</p>`;
+                    return Promise.resolve([]);
+                } else {
+                    divresultado.innerHTML = `<p class='alerta'>Ocorreu um erro na API: ${dataBusca.Error || "Erro desconhecido"}</p>`;
+                    return Promise.reject(new Error(dataBusca.Error || "Erro desconhecido"));
+                }
+            })
+            .then(filmesDetalhes => {
+                // Itera sobre todos os detalhes recebidos e exibe
+                filmesDetalhes.forEach(filme => {
+                    if (filme) {
+                        exibirFilme(filme);
+                    }
+                });
+            })
+            // Trata erros de rede ou processamento de JSON.
+            .catch(error => {
+                console.error("Erro geral na busca:", error);
+                if (divresultado.innerHTML === '') { 
+                    divresultado.innerHTML = `<p class='alerta'>Falha ao buscar dados. Detalhe: ${error.message}</p>`;
+                }
+            });
+        }
+
+        buscar.addEventListener("click", () => {
+            const tituloBusca = inputfilmes.value.trim();
+            if (tituloBusca === "") {
+                divresultado.innerHTML = "<p class='alerta'>Por favor, digite o nome de um filme ou série.</p>";
+                return;
+            }
+            buscarFilmes(tituloBusca);
+        });
+        // Permite que o usuário use a tecla 'Enter' para buscar.
+        inputfilmes.addEventListener("keypress", (e) => {
+            if (e.key === 'Enter') {
+                buscar.click();
+            }
+        });
+    </script>
+</body>
+</html>
